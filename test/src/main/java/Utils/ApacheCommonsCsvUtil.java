@@ -62,16 +62,6 @@ public class ApacheCommonsCsvUtil {
 		return stockDetailss;
 	}
 	
-	public static boolean isCSVFile(MultipartFile file) {
-		String extension = file.getOriginalFilename().split("\\.")[1];
-		
-		if(!extension.equals(csvExtension)) {
-			return false;
-		}
-		
-		return true;
-	}
-	
 	@SuppressWarnings("null")
 	private static Double ParseDouble(String strNumber) {
 		   if (strNumber != null && strNumber.length() > 0) {

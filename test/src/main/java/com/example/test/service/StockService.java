@@ -1,6 +1,5 @@
 package com.example.test.service;
 
-import java.io.FileReader;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
@@ -10,16 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.model.StockDetails;
 import com.example.test.model.TickerDetails;
 import com.example.test.repository.StockRepository;
 import com.example.test.repository.TickerRepository;
-import com.opencsv.bean.CsvToBeanBuilder;
 
 import Utils.ApacheCommonsCsvUtil;
-import Utils.OpenCsvUtil;
 
 
 @Service

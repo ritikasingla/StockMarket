@@ -4,15 +4,12 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.opencsv.bean.CsvBindByName;
-
 @Document(collection="stock-data")
 public class TickerDetails {
 
 	@Id
     private ObjectId _id;
 	
-	@CsvBindByName(column = "stock")
     private String stock;
 
 	public ObjectId get_id() {
