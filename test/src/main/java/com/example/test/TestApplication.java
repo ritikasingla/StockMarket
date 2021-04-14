@@ -13,15 +13,3 @@ public class TestApplication {
 		SpringApplication.run(TestApplication.class, args);
 	}
 }
-
-@RestController
-class TestController {
-	
-	@GetMapping("/getid")
-	public String getId() {
-		
-		return "hello";
-		
-	}
-	
-}

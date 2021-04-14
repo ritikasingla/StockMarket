@@ -18,6 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.test.model.StockDetails;
 import com.example.test.service.IStockService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "StockController", description = "REST Apis related to Stock Market Data")
+
 @RestController
 public class StockController {
 
@@ -26,17 +31,20 @@ public class StockController {
 	
 	
 	//in future i would like to add year parameter as well
+    @ApiOperation(value = "Get list of Stock in a quater (future add year) ", tags = "getStockDetailsByStockId")
 	@GetMapping("/{stock}/{quarter}")
 	public ResponseEntity<List<StockDetails>> getStockDetailsByStockId(@PathVariable("stock") String stock, @PathVariable("quarter") int quarter) {
 		
 	  return stockService.getStockDetailsByStockId(stock, quarter);
 	}
 	
+    @ApiOperation(value = "Save Stock data", tags = "addStockData")
 	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> addStockData(@RequestBody StockDetails stockDetail) {
 		return stockService.addStockData(stockDetail);
 	}
 	
+    @ApiOperation(value = "upload csv file", tags = "addStockDoc")
 	@PostMapping(value = "/uploadFile")
 	public ResponseEntity<String> addStockDoc(@RequestParam("file") MultipartFile file) {
 		
