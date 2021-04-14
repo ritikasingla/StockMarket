@@ -31,13 +31,11 @@ public class StockService implements IStockService {
 	public ResponseEntity<List<StockDetails>> getStockDetailsByStockId(String stockId, int quarter) {
 		
 		try {
-			Optional<List<StockDetails>> stockList = Optional.empty();
-			Optional<TickerDetails> tickerDetail = tickerRepository.findByStock(stockId);
-			if(null != tickerDetail) {
-				
-				stockList = stockRepository.findByStockIdAndQuarter(stockId, quarter);
-				return new ResponseEntity<>(stockList.get(), HttpStatus.OK);
-			}
+				Optional<List<StockDetails>> stockList = Optional.empty();
+				if(null != stockId) {
+					stockList = stockRepository.findByStockIdAndQuarter(stockId, quarter);
+					return new ResponseEntity<>(stockList.get(), HttpStatus.OK);
+				}
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		catch(Exception e) {
@@ -46,23 +44,11 @@ public class StockService implements IStockService {
 	}
 
 	
-	//Need to fix this, not working properly
 	@Override
 	public ResponseEntity<String> addStockData(StockDetails stockDetail) {
 		
 		try {
-		
-			//if ticker is available in ticker collection, then save the stock
-			if(null != stockDetail.getStock() && null != tickerRepository.findByStock(stockDetail.getStock())) {
-				stockRepository.save(stockDetail);
-				return new ResponseEntity<>("Stock Saved", HttpStatus.OK);
-			}
-			//if ticker is not available then add it in ticker collection first and then in stock detail collection
-			else if (null != stockDetail.getStock()){
-				//can use lombok builder rather than new tickerDetails
-				ObjectId tickerId = ObjectId.get();
-				tickerRepository.save(new TickerDetails(tickerId, stockDetail.getStock()));
-				//stockDetail.setStock_Id(tickerId);
+			if(null != stockDetail.getStock()) {
 				stockRepository.save(stockDetail);
 				return new ResponseEntity<>("Stock Saved", HttpStatus.OK);
 			}
